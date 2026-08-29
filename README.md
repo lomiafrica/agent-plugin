@@ -77,10 +77,10 @@ Use this folder as an Agent Plugin (`plugin.json` + `mcp.json` + `skills/`).
 
 ## Validate
 
-From the monorepo root:
+From the monorepo root (no npm package):
 
 ```bash
-pnpm plugin:validate
+node apps/agent-plugin/scripts/validate.mjs
 ```
 
 ## Monorepo
