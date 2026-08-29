@@ -17,6 +17,8 @@ const SKILL_NAME_PATTERN = /^[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$/;
 const MCP_URL = "https://mcp.lomi.africa/mcp";
 const PLUGIN_NAME = "lomi";
 const SKILL_DIR = "lomi-payments";
+const PRIVACY_URL = "https://lomi.africa/privacy";
+const TERMS_URL = "https://lomi.africa/terms";
 const errors = [];
 
 const readJson = (rel) => {
@@ -98,6 +100,29 @@ if (codexManifest) {
   if (codexManifest.skills !== "./skills/") {
     errors.push('.codex-plugin/plugin.json: skills must be "./skills/"');
   }
+  const iface = codexManifest.interface;
+  if (!iface || typeof iface !== "object") {
+    errors.push(".codex-plugin/plugin.json: interface is required");
+  } else {
+    if (iface.privacyPolicyURL !== PRIVACY_URL) {
+      errors.push(
+        `.codex-plugin/plugin.json: interface.privacyPolicyURL must be ${PRIVACY_URL}`,
+      );
+    }
+    if (iface.termsOfServiceURL !== TERMS_URL) {
+      errors.push(
+        `.codex-plugin/plugin.json: interface.termsOfServiceURL must be ${TERMS_URL}`,
+      );
+    }
+    if (iface.brandColor !== "#1A5FD4") {
+      errors.push('.codex-plugin/plugin.json: interface.brandColor must be "#1A5FD4"');
+    }
+    if (!Array.isArray(iface.defaultPrompt) || iface.defaultPrompt.length < 3) {
+      errors.push(
+        ".codex-plugin/plugin.json: interface.defaultPrompt needs at least 3 prompts",
+      );
+    }
+  }
 } else {
   errors.push("Missing file: .codex-plugin/plugin.json");
 }
@@ -110,6 +135,9 @@ if (codexMcp) {
     errors.push(".mcp.json: lomi.url is required");
   } else if (lomi.url !== MCP_URL) {
     errors.push(`.mcp.json: lomi.url must be ${MCP_URL}`);
+  }
+  if (lomi && lomi.oauth_resource !== MCP_URL) {
+    errors.push(`.mcp.json: lomi.oauth_resource must be ${MCP_URL}`);
   }
 } else {
   errors.push("Missing file: .mcp.json");
@@ -172,6 +200,40 @@ if (!existsSync(skillPath)) {
     if (!body.includes("lomi_webhooks")) {
       errors.push("SKILL.md: must document lomi_webhooks");
     }
+    if (!body.includes("lomi_transactions")) {
+      errors.push("SKILL.md: must document lomi_transactions");
+    }
+    if (!body.includes("lomi_register_agent")) {
+      errors.push("SKILL.md: must document lomi_register_agent");
+    }
+    if (!body.includes("Failure modes")) {
+      errors.push("SKILL.md: must include Failure modes");
+    }
+  }
+}
+
+const readmePath = join(root, "README.md");
+if (!existsSync(readmePath)) {
+  errors.push("README.md is missing");
+} else {
+  const readme = readFileSync(readmePath, "utf8");
+  for (const needle of ["OpenCode", "Claude", "PUBLISH.md", "Agent Plugins 1.0"]) {
+    if (!readme.includes(needle)) {
+      errors.push(`README.md: must mention ${needle}`);
+    }
+  }
+}
+
+const publishPath = join(root, "PUBLISH.md");
+if (!existsSync(publishPath)) {
+  errors.push("PUBLISH.md is missing");
+} else {
+  const publish = readFileSync(publishPath, "utf8");
+  if (!publish.includes("cursor.com/marketplace/publish")) {
+    errors.push("PUBLISH.md: must include Cursor Marketplace submit URL");
+  }
+  if (!publish.includes("Do not claim")) {
+    errors.push("PUBLISH.md: must warn not to claim listings early");
   }
 }
 

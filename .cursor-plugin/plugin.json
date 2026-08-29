@@ -1,6 +1,6 @@
 {
   "name": "lomi",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Collect payments with lomi. MCP: create hosted checkout, send the URL, and confirm via webhooks.",
   "author": {
     "name": "lomi.",

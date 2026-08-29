@@ -1,6 +1,6 @@
 {
   "name": "lomi",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Collect payments with lomi. MCP: hosted checkout, send the URL, confirm via webhooks.",
   "author": {
     "name": "lomi.",
@@ -21,14 +21,14 @@
     "category": "Developer Tools",
     "capabilities": ["Read", "Write"],
     "websiteURL": "https://lomi.africa",
-    "privacyPolicyURL": "https://docs.lomi.africa/start/merchant-of-record/privacy",
-    "termsOfServiceURL": "https://docs.lomi.africa/start/merchant-of-record/terms",
+    "privacyPolicyURL": "https://lomi.africa/privacy",
+    "termsOfServiceURL": "https://lomi.africa/terms",
     "defaultPrompt": [
       "Create a lomi. hosted checkout and give me the URL",
       "Register a lomi. webhook then confirm a payment",
       "Connect to lomi. MCP and list recent transactions"
     ],
-    "brandColor": "#171717",
+    "brandColor": "#1A5FD4",
     "composerIcon": "./assets/logo.svg",
     "logo": "./assets/logo.svg",
     "screenshots": []
