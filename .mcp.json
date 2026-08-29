@@ -1,6 +1,6 @@
 {
   "mcpServers": {
-    "lomi": {
+    "lomi.": {
       "type": "http",
       "url": "https://mcp.lomi.africa/mcp",
       "oauth_resource": "https://mcp.lomi.africa/mcp"

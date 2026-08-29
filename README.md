@@ -25,7 +25,7 @@ Manual MCP-only config (no plugin folder):
 ```json
 {
   "mcpServers": {
-    "lomi": {
+    "lomi.": {
       "url": "https://mcp.lomi.africa/mcp"
     }
   }
