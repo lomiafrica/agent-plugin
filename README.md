@@ -40,7 +40,7 @@ This repo is a Codex marketplace + plugin (`/.agents/plugins/marketplace.json` +
 
 ```bash
 # local (monorepo submodule) or public GitHub
-codex plugin marketplace add /path/to/apps/agent-plugin
+codex plugin marketplace add /path/to/apps/tools/agent-plugin
 # or: codex plugin marketplace add lomiafrica/agent-plugin
 
 codex plugin add lomi@lomi
@@ -104,12 +104,12 @@ Local webhook relay outside MCP: `lomi listen`. Scaffold a handler with `lomi in
 From the monorepo root (no npm package):
 
 ```bash
-node apps/agent-plugin/scripts/validate.mjs
+node apps/tools/agent-plugin/scripts/validate.mjs
 ```
 
 ## Monorepo
 
-This directory is the public submodule [`lomiafrica/agent-plugin`](https://github.com/lomiafrica/agent-plugin) at `apps/agent-plugin`. Marketplace submission uses this repo as-is. See [PUBLISH.md](./PUBLISH.md).
+This directory is the public submodule [`lomiafrica/agent-plugin`](https://github.com/lomiafrica/agent-plugin) at `apps/tools/agent-plugin`. Marketplace submission uses this repo as-is. See [PUBLISH.md](./PUBLISH.md).
 
 ## License
 

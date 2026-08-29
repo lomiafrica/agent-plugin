@@ -6,7 +6,7 @@ Use this when you are ready to list the plugin publicly. **Nothing in this file 
 
 - [ ] **Public GitHub repo:** [`lomiafrica/agent-plugin`](https://github.com/lomiafrica/agent-plugin) (submodule of the lomi. monorepo).
 - [ ] Confirm `repository` in [`plugin.json`](./plugin.json) and [`.cursor-plugin/plugin.json`](./.cursor-plugin/plugin.json) matches that URL.
-- [ ] Run `node apps/agent-plugin/scripts/validate.mjs` from the monorepo root.
+- [ ] Run `node apps/tools/agent-plugin/scripts/validate.mjs` from the monorepo root.
 - [ ] Confirm hosted MCP is healthy: `https://mcp.lomi.africa/health`
 - [ ] Privacy policy URL live: `https://lomi.africa/privacy`
 - [ ] Terms URL live: `https://lomi.africa/terms`
@@ -41,7 +41,7 @@ codex plugin add lomi@lomi
 3. Smoke locally before pushing the submodule:
 
 ```bash
-codex plugin marketplace add /absolute/path/to/apps/agent-plugin
+codex plugin marketplace add /absolute/path/to/apps/tools/agent-plugin
 codex plugin list
 codex plugin add lomi@lomi
 ```

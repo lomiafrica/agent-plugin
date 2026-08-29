@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 /**
- * Validates apps/agent-plugin manifests and skill layout (no network).
+ * Validates apps/tools/agent-plugin manifests and skill layout (no network).
  */
 import { existsSync, readFileSync } from "node:fs";
 import { dirname, join } from "node:path";
