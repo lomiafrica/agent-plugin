@@ -1,0 +1,36 @@
+{
+  "name": "lomi",
+  "version": "0.1.0",
+  "description": "Collect payments with lomi. MCP: hosted checkout, send the URL, confirm via webhooks.",
+  "author": {
+    "name": "lomi.",
+    "email": "hello@lomi.africa",
+    "url": "https://lomi.africa"
+  },
+  "homepage": "https://lomi.africa",
+  "repository": "https://github.com/lomiafrica/agent-plugin",
+  "license": "MIT",
+  "keywords": ["mcp", "payments", "checkout", "webhooks", "agents", "oauth"],
+  "skills": "./skills/",
+  "mcpServers": "./.mcp.json",
+  "interface": {
+    "displayName": "lomi.",
+    "shortDescription": "Hosted checkout for West Africa",
+    "longDescription": "Connect Codex to hosted lomi. MCP. Create a checkout session, send the customer the checkout URL, register a webhook, and confirm the transaction before fulfilling. OAuth Connect with lomi. is the recommended auth path; a merchant secret key works too.",
+    "developerName": "lomi.",
+    "category": "Developer Tools",
+    "capabilities": ["Read", "Write"],
+    "websiteURL": "https://lomi.africa",
+    "privacyPolicyURL": "https://docs.lomi.africa/start/merchant-of-record/privacy",
+    "termsOfServiceURL": "https://docs.lomi.africa/start/merchant-of-record/terms",
+    "defaultPrompt": [
+      "Create a lomi. hosted checkout and give me the URL",
+      "Register a lomi. webhook then confirm a payment",
+      "Connect to lomi. MCP and list recent transactions"
+    ],
+    "brandColor": "#171717",
+    "composerIcon": "./assets/logo.svg",
+    "logo": "./assets/logo.svg",
+    "screenshots": []
+  }
+}

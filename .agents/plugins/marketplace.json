@@ -1,0 +1,20 @@
+{
+  "name": "lomi",
+  "interface": {
+    "displayName": "lomi."
+  },
+  "plugins": [
+    {
+      "name": "lomi",
+      "source": {
+        "source": "local",
+        "path": "./plugins/lomi"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      },
+      "category": "Developer Tools"
+    }
+  ]
+}

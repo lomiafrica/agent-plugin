@@ -1,0 +1,16 @@
+{
+  "name": "lomi",
+  "version": "0.1.0",
+  "description": "Collect payments with lomi. MCP: create hosted checkout, send the URL, and confirm via webhooks.",
+  "author": {
+    "name": "lomi.",
+    "email": "hello@lomi.africa"
+  },
+  "homepage": "https://lomi.africa",
+  "repository": "https://github.com/lomiafrica/agent-plugin",
+  "license": "MIT",
+  "keywords": ["mcp", "payments", "checkout", "webhooks", "west-africa", "agents"],
+  "logo": "assets/logo.svg",
+  "skills": "skills/",
+  "mcpServers": "mcp.json"
+}
