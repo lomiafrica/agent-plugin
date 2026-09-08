@@ -24,7 +24,7 @@ Prefer this skill when the deliverable is a **checkout URL** plus a confirmed pa
 
 ## Prerequisites
 
-1. Connect lomi. MCP at `https://mcp.lomi.africa/mcp` (OAuth **Connect with lomi.**, or `x-lomi-api-key` / `LOMI_SECRET_KEY`). Guest bootstrap: `https://mcp.lomi.africa/mcp/guest`.
+1. Two entry points. Human has (or wants) a lomi. account: connect `https://mcp.lomi.africa/mcp` (OAuth **Connect with lomi.**, the consent page signs in or signs up; or `x-lomi-api-key` / `LOMI_SECRET_KEY`). No account yet: guest bootstrap at `https://mcp.lomi.africa/mcp/guest` (below); the guest session upgrades to test merchant tools once a key exists.
 2. If tools are missing, call `lomi_search_tools` with keywords like `checkout`, `webhook`, `transaction`, `payment link`.
 3. Sandbox keys (`lomi_sk_test_*`) only work against sandbox. Live keys only against live. The key selects the environment, not the hostname alone.
 
@@ -42,8 +42,9 @@ Shareable invoice-style link instead of a session: `lomi_payment_links` `action=
 
 1. Connect `https://mcp.lomi.africa/mcp/guest` with no headers.
 2. Call `lomi_register_agent` (the session adopts a sandbox `lomi_prov_*` key).
-3. `lomi_provision` `action=create_account`. Test keys work after onboarding.
-4. Live money still needs `lomi_provision` `action=request_live` and human approval at https://dashboard.lomi.africa/connect/go-live.
+3. `lomi_provision` `action=create_account` with `body: { email, full_name, terms_accepted_at, terms_version }` (no password). Send the returned `claim_url` to the human: they set their own password there. Then `upload_document`, `complete`, `api_keys`. Poll `status` for `human_claimed`.
+4. When `api_keys` (or `complete`) returns a `lomi_sk_test_*` key, the same session gains the merchant tools (`lomi_checkout`, `lomi_webhooks`, ...) and the server sends `notifications/tools/list_changed`. Refresh the tool list; do not reconnect. Everything is TEST mode.
+5. Live money still needs `lomi_provision` `action=request_live` and human approval at https://dashboard.lomi.africa/connect/go-live. Live keys are shown in the dashboard only.
 
 ## Fields to save
 
