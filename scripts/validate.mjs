@@ -25,6 +25,10 @@ const isText = (value) => value === `${value}`;
 const isRecord = (value) =>
   value != null && !Array.isArray(value) && value === Object(value);
 
+/** Plugin name is `lomi`; hosted MCP server key is branded `lomi.` */
+const lomiMcpServer = (servers) =>
+  isRecord(servers) ? (servers.lomi ?? servers["lomi."]) : undefined;
+
 const readJson = (rel) => {
   const path = join(root, rel);
   if (!existsSync(path)) {
@@ -62,9 +66,9 @@ if (mcp) {
   if (!servers || !isRecord(servers)) {
     errors.push("mcp.json: mcpServers object is required");
   } else {
-    const lomi = servers.lomi;
+    const lomi = lomiMcpServer(servers);
     if (!lomi) {
-      errors.push("mcp.json: mcpServers.lomi is required");
+      errors.push("mcp.json: mcpServers.lomi (or lomi.) is required");
     } else {
       if (lomi.type !== "streamable-http") {
         errors.push("mcp.json: lomi.type must be streamable-http");
@@ -134,7 +138,7 @@ if (codexManifest) {
 const codexMcp = readJson(".mcp.json");
 if (codexMcp) {
   const servers = codexMcp.mcpServers ?? codexMcp.mcp_servers ?? codexMcp;
-  const lomi = servers?.lomi;
+  const lomi = lomiMcpServer(servers);
   if (!lomi?.url) {
     errors.push(".mcp.json: lomi.url is required");
   } else if (lomi.url !== MCP_URL) {
