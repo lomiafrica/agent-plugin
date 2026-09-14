@@ -21,6 +21,10 @@ const PRIVACY_URL = "https://lomi.africa/privacy";
 const TERMS_URL = "https://lomi.africa/terms";
 const errors = [];
 
+const isText = (value) => value === `${value}`;
+const isRecord = (value) =>
+  value != null && !Array.isArray(value) && value === Object(value);
+
 const readJson = (rel) => {
   const path = join(root, rel);
   if (!existsSync(path)) {
@@ -40,7 +44,7 @@ if (plugin) {
   if (plugin.$schema !== PLUGIN_SCHEMA) {
     errors.push(`plugin.json: $schema must be ${PLUGIN_SCHEMA}`);
   }
-  if (!plugin.name || typeof plugin.name !== "string") {
+  if (!plugin.name || !isText(plugin.name)) {
     errors.push("plugin.json: name is required");
   } else if (plugin.name.length > 64 || !PLUGIN_NAME_PATTERN.test(plugin.name)) {
     errors.push(`plugin.json: invalid name "${plugin.name}"`);
@@ -55,7 +59,7 @@ if (mcp) {
     errors.push(`mcp.json: $schema must be ${MCP_SCHEMA}`);
   }
   const servers = mcp.mcpServers;
-  if (!servers || typeof servers !== "object") {
+  if (!servers || !isRecord(servers)) {
     errors.push("mcp.json: mcpServers object is required");
   } else {
     const lomi = servers.lomi;
@@ -101,7 +105,7 @@ if (codexManifest) {
     errors.push('.codex-plugin/plugin.json: skills must be "./skills/"');
   }
   const iface = codexManifest.interface;
-  if (!iface || typeof iface !== "object") {
+  if (!iface || !isRecord(iface)) {
     errors.push(".codex-plugin/plugin.json: interface is required");
   } else {
     if (iface.privacyPolicyURL !== PRIVACY_URL) {
