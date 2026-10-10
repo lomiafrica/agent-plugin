@@ -2,7 +2,7 @@
 /**
  * Validates apps/tools/agent-plugin manifests and skill layout (no network).
  */
-import { existsSync, readFileSync } from "node:fs";
+import { existsSync, lstatSync, readdirSync, readFileSync } from "node:fs";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
 
@@ -244,6 +244,40 @@ if (!existsSync(publishPath)) {
     errors.push("PUBLISH.md: must warn not to claim listings early");
   }
 }
+
+const PRIVATE_IN_PUBLIC = [
+  ["notion.so", "a private Notion URL"],
+  ["app.notion.com", "a private Notion URL"],
+  ["notion.site", "a private Notion URL"],
+  ["agents.md", "the private dashboard agent file"],
+];
+const SKIP_DIRS = new Set(["node_modules", ".git", "plugins"]);
+
+const scanPublicText = (dir, rel = "") => {
+  for (const name of readdirSync(dir)) {
+    if (SKIP_DIRS.has(name)) continue;
+    const next = rel ? `${rel}/${name}` : name;
+    if (next === "scripts/validate.mjs") continue;
+    const abs = join(dir, name);
+    const st = lstatSync(abs);
+    if (st.isSymbolicLink()) continue;
+    if (st.isDirectory()) {
+      scanPublicText(abs, next);
+      continue;
+    }
+    if (st.size > 1_000_000) continue;
+    const text = readFileSync(abs, "utf8");
+    if (text.includes("\0")) continue;
+    const lower = text.toLowerCase();
+    for (const [needle, why] of PRIVATE_IN_PUBLIC) {
+      if (lower.includes(needle)) {
+        errors.push(`${next}: public plugin must not mention ${why}`);
+      }
+    }
+  }
+};
+
+scanPublicText(root);
 
 if (errors.length > 0) {
   console.error("agent-plugin validation failed:\n");
