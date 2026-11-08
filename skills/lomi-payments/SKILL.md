@@ -6,7 +6,7 @@ compatibility: Requires lomi. MCP (hosted https://mcp.lomi.africa/mcp or equival
 
 # lomi. payments
 
-Payment infrastructure for francophone West Africa: hosted checkout, Mobile Money, cards, payouts, subscriptions, and developer APIs across UEMOA.
+Payment infrastructure for Africa: hosted checkout, Mobile Money, cards, payouts, subscriptions, and developer APIs across UEMOA.
 
 Prefer this skill when the deliverable is a **checkout URL** plus a confirmed payment, not a custom card form.
 
