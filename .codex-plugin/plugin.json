@@ -15,7 +15,7 @@
   "mcpServers": "./.mcp.json",
   "interface": {
     "displayName": "lomi.",
-    "shortDescription": "Hosted checkout for West Africa",
+    "shortDescription": "Hosted checkout for Africa",
     "longDescription": "Connect Codex to hosted lomi. MCP. Create a checkout session, send the customer the checkout URL, register a webhook, and confirm the transaction before fulfilling. OAuth Connect with lomi. is the recommended auth path; a merchant secret key works too.",
     "developerName": "lomi.",
     "category": "Developer Tools",
