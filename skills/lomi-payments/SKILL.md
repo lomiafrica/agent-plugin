@@ -12,7 +12,7 @@ Prefer this skill when the deliverable is a **checkout URL** plus a confirmed pa
 
 ## When to use
 
-- Collect a one-off payment in XOF, USD, or EUR.
+- Collect a one-off payment in XOF, USD, EUR, GBP, CAD, XAF, GHS, KES, MAD, or ZAR.
 - Send a customer to hosted checkout instead of building a payment form.
 - Confirm Mobile Money asynchronously with webhooks and `lomi_transactions action=get`.
 
